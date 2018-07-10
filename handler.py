@@ -32,7 +32,8 @@ def order(user_id, user_name, plate_type, *plates):
     )
 
     result = {
-        'text': 'Coming right up :heavy_check_mark:',
+        #'text': 'Coming right up :heavy_check_mark:',
+        'text': '',
         'response_type': 'in_channel'
     }
 
