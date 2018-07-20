@@ -6,7 +6,7 @@ provider:
   name: aws
   runtime: python3.6
   environment:
-    ORDER_TABLE: ${self:service}-order-${opt:stage, self:provider.stage}
+    ORDER_TABLE: ${self:service}-db-${opt:stage, self:provider.stage}
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -28,7 +28,7 @@ custom:
 
 functions:
   frichti-slack:
-    handler: handler.handler
+    handler: main.endpoint
     memroySize: 128
     timeout: 20
     events:
@@ -44,20 +44,20 @@ resources:
       Properties:
         AttributeDefinitions:
           -
-            AttributeName: user_id
+            AttributeName: team_id
             AttributeType: S
 
           -
-            AttributeName: plate_type
+            AttributeName: user_id
             AttributeType: S
 
         KeySchema:
           -
-            AttributeName: user_id
+            AttributeName: team_id
             KeyType: HASH
 
           -
-            AttributeName: plate_type
+            AttributeName: user_id
             KeyType: RANGE
 
         ProvisionedThroughput:
