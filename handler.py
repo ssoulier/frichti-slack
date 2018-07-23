@@ -371,7 +371,8 @@ def handler(event, _):
             r = requests.post(payload["response_url"], json=callback_result)
 
             if r.status_code == 200:
-                return
+                result = responseTemplate.copy()
+                return result
 
     else:
         user_id = body['user_id'][0]
