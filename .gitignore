@@ -1,3 +1,5 @@
 node_modules/*
 .idea/
 .serverless/
+package-lock.json
+package.json
