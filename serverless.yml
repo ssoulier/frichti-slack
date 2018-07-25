@@ -29,7 +29,7 @@ custom:
 functions:
   frichti-slack:
     handler: main.endpoint
-    memroySize: 128
+    memorySize: 128
     timeout: 20
     events:
       - http:

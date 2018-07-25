@@ -9,6 +9,7 @@ class dbLayer():
         self.table = dynamo.Table(os.environ['ORDER_TABLE'])
 
     def _key(self, team_id, user_id):
+        key = {'team_id': team_id, 'user_id': user_id}
         return {'team_id': team_id, 'user_id': user_id}
 
     def clear_team(self, team_id):
