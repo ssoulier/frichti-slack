@@ -9,15 +9,20 @@ class dbLayer():
         self.table = dynamo.Table(os.environ['ORDER_TABLE'])
 
     def _key(self, team_id, user_id):
-        key = {'team_id': team_id, 'user_id': user_id}
         return {'team_id': team_id, 'user_id': user_id}
 
-    def clear_team(self, team_id):
+    def delete_team(self, team_id):
 
         items = self.get_team_items(team_id)
 
         for item in items:
             self.table.delete_item(Key=self._key(item['team_id'], item['user_id']))
+
+        return True
+
+    def delete_user(self, team_id, user_id):
+
+        self.table.delete_item(Key=self._key(team_id, user_id))
 
         return True
 
@@ -55,8 +60,11 @@ class dbLayer():
                 if dish['dish_name'] != dish_name:
                     updated_dishes.append(dish)
 
-        item['dishes'] = updated_dishes
-        self.table.put_item(Item=item)
+        if updated_dishes:
+            item['dishes'] = updated_dishes
+            self.table.put_item(Item=item)
+        else:
+            self.delete_user(team_id, user_id)
 
         return True
 

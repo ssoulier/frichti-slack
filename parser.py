@@ -89,7 +89,7 @@ class CommandParser():
                 callback_response_body = self.response_layer.cancel_clear_response()
 
             elif callback_action_name == CallbackAction.remove:
-                self.db_layer.clear_team(self.team_id)
+                self.db_layer.delete_team(self.team_id)
                 callback_response_body = self.response_layer.confirm_clear_response()
 
         requests.post(self.response_url, json=callback_response_body)
