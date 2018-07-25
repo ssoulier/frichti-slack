@@ -3,3 +3,4 @@ node_modules/*
 .serverless/
 package-lock.json
 package.json
+__pycache__/*
